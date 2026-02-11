@@ -1,0 +1,43 @@
+services:
+  django:
+    build:
+      context: ./backend/rosie
+    container_name: rosie-backend
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/rosie/.env
+    depends_on:
+      postgres:
+        condition: service_started
+    networks:
+      - app_net
+
+  postgres:
+    image: postgres:15
+    container_name: rosie-db
+    environment:
+      POSTGRES_DB: rosie
+      POSTGRES_USER: rosie
+      POSTGRES_PASSWORD: rosie
+    ports:
+      - "5432:5432"
+    networks:
+      - app_net
+
+  frontend:
+    build:
+      context: ./frontend/rosie
+    container_name: rosie-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - django
+    networks:
+      - app_net
+
+
+networks:
+  app_net:
+    driver: bridge
