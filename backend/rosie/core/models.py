@@ -2,144 +2,95 @@ from __future__ import annotations
 
 from django.db import models
 from django.utils.text import slugify
+from accounts.models import Tenant
 
 
-class TimeStampedModel(models.Model):
+class Collection(models.Model):
+    account = models.ForeignKey(Tenant, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    class Meta:
-        abstract = True
-
-
-class Source(TimeStampedModel):
-    SOURCE_TYPE_RSS = "rss"
-    SOURCE_TYPE_API = "api"
-    SOURCE_TYPE_SCRAPE = "scrape"
-
-    SOURCE_TYPE_CHOICES = [
-        (SOURCE_TYPE_RSS, "RSS"),
-        (SOURCE_TYPE_API, "API"),
-        (SOURCE_TYPE_SCRAPE, "Scrape"),
-    ]
-
-    name = models.CharField(max_length=200, unique=True)
-    source_type = models.CharField(max_length=20, choices=SOURCE_TYPE_CHOICES)
-    url = models.URLField(blank=True, null=True)
-    is_active = models.BooleanField(default=True)
-
-    def __str__(self) -> str:
+    def __str__(self):
         return self.name
 
 
-class Category(TimeStampedModel):
-    """
-    Two-level taxonomy:
-      - parent=None => Level 1 category
-      - parent!=None => Level 2 category
-    """
+class FetcherType(models.TextChoices):
+    SEEDLIST = "seedlist"
+    MONITOR = "monitor"
+    FULL_SITE = "full_site"
+    DISCOVERY = "discovery"
+    RSS = "rss"
+    SITEMAP = "sitemap"
 
-    name = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=220, unique=True, blank=True)
-    description = models.TextField(blank=True)
-    parent = models.ForeignKey(
-        "self",
-        on_delete=models.PROTECT,
-        null=True,
-        blank=True,
-        related_name="children",
+
+class FetcherStatus(models.TextChoices):
+    PENDING = "pending"
+    PAUSED = "paused"
+    RUNNING = "running"
+    COMPLETED = "completed"
+    FAILED = "failed"
+
+
+class FetcherSchedule(models.TextChoices):
+    ONCE = "once"
+    INTERVAL = "interval"
+    CRON = "cron"
+
+
+class FetcherOutputFormat(models.TextChoices):
+    WARC = "warc"
+    GZIP = "gzip"
+
+
+class Fetcher(models.Model):
+    collection = models.ForeignKey(Collection, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    fetcher_type = models.CharField(max_length=255, choices=FetcherType.choices)
+    status = models.CharField(max_length=255, choices=FetcherStatus.choices)
+    description = models.TextField(blank=True, null=True)
+    use_headless = models.BooleanField(default=False)
+    use_rotating_proxy = models.BooleanField(default=False)
+    schedule = models.CharField(max_length=255, choices=FetcherSchedule.choices)
+    cron_schedule_config = models.CharField(max_length=255, blank=True, null=True)
+    depth = models.IntegerField(default=3)
+    inclusion_domains = models.JSONField(default=list)
+    exclusion_domains = models.JSONField(default=list)
+    output_format = models.CharField(
+        max_length=255, choices=FetcherOutputFormat.choices
     )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=["parent", "name"], name="uniq_category_parent_name")
-        ]
-        indexes = [
-            models.Index(fields=["parent", "name"]),
-        ]
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            base = slugify(self.name)[:200] or "category"
-            slug = base
-            i = 2
-            while Category.objects.filter(slug=slug).exclude(pk=self.pk).exists():
-                slug = f"{base}-{i}"
-                i += 1
-            self.slug = slug
-        super().save(*args, **kwargs)
-
-    @property
-    def is_parent(self) -> bool:
-        return self.parent_id is None
-
-    def __str__(self) -> str:
+    def __str__(self):
         return self.name
 
 
-class Tag(TimeStampedModel):
-    name = models.CharField(max_length=100, unique=True)
-    slug = models.SlugField(max_length=120, unique=True, blank=True)
+class FetcherSeedlist(models.Model):
+    fetcher = models.ForeignKey(Fetcher, on_delete=models.CASCADE)
+    url = models.URLField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            base = slugify(self.name)[:100] or "tag"
-            slug = base
-            i = 2
-            while Tag.objects.filter(slug=slug).exclude(pk=self.pk).exists():
-                slug = f"{base}-{i}"
-                i += 1
-            self.slug = slug
-        super().save(*args, **kwargs)
-
-    def __str__(self) -> str:
-        return self.name
+    def __str__(self):
+        return self.url
 
 
-class Article(TimeStampedModel):
-    source = models.ForeignKey(Source, on_delete=models.PROTECT, related_name="articles")
-    category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name="articles")
-    title = models.CharField(max_length=500)
-    content = models.TextField(blank=True)
-    author = models.CharField(max_length=200, blank=True)
-    publish_date = models.DateTimeField(db_index=True)
-    url = models.URLField(unique=True)
-    image_url = models.URLField(blank=True)
-    tags = models.ManyToManyField(Tag, blank=True, related_name="articles")
+class FetcherRun(models.Model):
+    fetcher = models.ForeignKey(Fetcher, on_delete=models.CASCADE)
+    pages_crawled = models.IntegerField(default=0)
+    bytes_downloaded = models.IntegerField(default=0)
+    total_requests = models.IntegerField(default=0)
+    total_errors = models.IntegerField(default=0)
+    total_timeouts = models.IntegerField(default=0)
+    total_redirects = models.IntegerField(default=0)
+    total_failures = models.IntegerField(default=0)
+    total_successes = models.IntegerField(default=0)
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
-    class Meta:
-        indexes = [
-            models.Index(fields=["publish_date"]),
-            models.Index(fields=["source", "publish_date"]),
-            models.Index(fields=["category", "publish_date"]),
-        ]
-
-    def __str__(self) -> str:
-        return self.title
-
-
-class ArticleCluster(TimeStampedModel):
-    name = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=220, unique=True, blank=True)
-    description = models.TextField(blank=True)
-    trending = models.BooleanField(default=False, db_index=True)
-    articles = models.ManyToManyField(Article, related_name="clusters", blank=True)
-
-    class Meta:
-        indexes = [
-            models.Index(fields=["trending", "updated_at"]),
-        ]
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            base = slugify(self.name)[:200] or "cluster"
-            slug = base
-            i = 2
-            while ArticleCluster.objects.filter(slug=slug).exclude(pk=self.pk).exists():
-                slug = f"{base}-{i}"
-                i += 1
-            self.slug = slug
-        super().save(*args, **kwargs)
-
-    def __str__(self) -> str:
-        return self.name
+    def __str__(self):
+        return self.fetcher.name
