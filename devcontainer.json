@@ -1,0 +1,16 @@
+{
+  "name": "Rosie Fullstack Dev Environment",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "django",
+  "workspaceFolder": "/app",
+  "shutdownAction": "stopCompose",
+  "extensions": [
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "ms-azuretools.vscode-docker",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode"
+  ],
+  "forwardPorts": [8000, 3000],
+  "postCreateCommand": "pip install -r requirements.txt"
+}
