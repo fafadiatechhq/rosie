@@ -1,0 +1,67 @@
+version: "3.9"
+
+services:
+  django:
+    build:
+      context: ./backend/rosie
+      dockerfile: Dockerfile.dev
+    container_name: rosie-backend
+    working_dir: /workspace/backend/rosie
+    command: >
+      sh -c "
+      sleep 5 &&
+      python manage.py migrate &&
+      python manage.py createsu &&
+      python manage.py runserver 0.0.0.0:8000
+      "
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/rosie/.env
+    volumes:
+      - .:/workspace
+    depends_on:
+      - postgres
+    networks:
+      - app_net
+
+  postgres:
+    image: postgres:15
+    container_name: rosie-db
+    environment:
+      POSTGRES_DB: rosie
+      POSTGRES_USER: rosie
+      POSTGRES_PASSWORD: rosie
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app_net
+
+  frontend:
+    build:
+      context: ./frontend/rosie
+      dockerfile: Dockerfile.dev
+    container_name: rosie-frontend
+    working_dir: /workspace/frontend/rosie
+    command: >
+      sh -c "
+      npm install &&
+      npm run dev
+      "
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/workspace
+    depends_on:
+      - django
+    networks:
+      - app_net
+
+volumes:
+  postgres_data:
+
+networks:
+  app_net:
+    driver: bridge
