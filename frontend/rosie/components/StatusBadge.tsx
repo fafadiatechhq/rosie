@@ -1,21 +1,11 @@
 import { cn } from "@/utils/utils";
 
 interface StatusBadgeProps {
-  status:
-    | "running"
-    | "idle"
-    | "failed"
-    | "success"
-    | "failure"
-    | "active"
-    | "paused";
+  status: "running" | "idle" | "failed" | "success" | "failure" | "active" | "paused";
   className?: string;
 }
 
-const statusConfig: Record<
-  string,
-  { label: string; dotClass: string; bgClass: string }
-> = {
+const statusConfig: Record<string, { label: string; dotClass: string; bgClass: string }> = {
   running: {
     label: "Running",
     dotClass: "bg-success animate-pulse-glow",

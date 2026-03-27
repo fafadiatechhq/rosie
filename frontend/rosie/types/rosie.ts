@@ -37,26 +37,26 @@ export interface FetcherRun {
 
 export interface UsageData {
   currentPeriod: {
-    pagesCrawled: number;
-    pagesLimit: number;
-    proxyRequests: number;
-    proxyLimit: number;
-    collectionsUsed: number;
-    collectionsLimit: number;
-    fetchersUsed: number;
-    fetchersLimit: number;
-  };
+    pagesCrawled: number
+    pagesLimit: number
+    proxyRequests: number
+    proxyLimit: number
+    collectionsUsed: number
+    collectionsLimit: number
+    fetchersUsed: number
+    fetchersLimit: number
+  }
   dailyUsage: Array<{
-    date: string;
-    pages: number;
-    proxy: number;
-  }>;
+    date: string
+    pages: number
+    proxy: number
+  }>
 }
 
 export interface ActivityItem {
-  id: string;
-  type: "run_started" | "run_completed" | "run_failed" | "webhook_delivered";
-  message: string;
-  fetcherId: string;
-  timestamp: string;
+  id: string
+  type: 'run_started' | 'run_completed' | 'run_failed' | 'webhook_delivered'
+  message: string
+  fetcherId: string
+  timestamp: string
 }
