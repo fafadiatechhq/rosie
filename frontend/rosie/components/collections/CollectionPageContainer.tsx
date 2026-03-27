@@ -8,13 +8,11 @@ import Link from "next/link";
 import { FolderOpen, Plus, ArrowRight} from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-
 function formatNumber(n: number): string {
   if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + "M";
   if (n >= 1_000) return (n / 1_000).toFixed(1) + "K";
   return n.toString();
 }
-
 export default function CollectionPageContainer() {
   return (
     <div className="p-6 lg:p-8 max-w-7xl mx-auto space-y-6">
@@ -95,4 +93,5 @@ export default function CollectionPageContainer() {
     </div>
   );
 }
+
 
