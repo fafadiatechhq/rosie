@@ -6,5 +6,4 @@ export default function CollectionPage() {
     <React.Fragment> 
       <CollectionPageContainer />
       </React.Fragment>
-
 )}
