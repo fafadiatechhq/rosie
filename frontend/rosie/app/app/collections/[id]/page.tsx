@@ -1,10 +1,11 @@
+import AppLayout from "@/components/AppLayout";
 import { CollectionDetailPageContainer } from "@/components/collections/CollectionDetailPageContainer";
 import React from "react";
 
 export default function CollectionDetailPage() {
   return (
-    <React.Fragment>
+    <AppLayout>
       <CollectionDetailPageContainer />
-    </React.Fragment>
+    </AppLayout>
   );
 }
