@@ -31,7 +31,7 @@ function formatDateTime(dateStr: string): string {
   });
 }
 
-export default function FetcherDetail() {
+export default function FetcherDetailPageContainer() {
   const { id } = useParams();
   const fetcher = mockFetchers.find((f) => f.fetcherId === id);
   const runs = mockRuns.filter((r) => r.fetcherId === id);
