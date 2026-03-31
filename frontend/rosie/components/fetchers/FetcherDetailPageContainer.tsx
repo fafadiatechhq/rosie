@@ -5,14 +5,10 @@ import { mockFetchers, mockRuns } from "@/data/mock-data";
 import { StatusBadge } from "@/components/StatusBadge";
 import { Button } from "@/components/ui/button";
 import { Play, Settings, Globe, Bot, Clock, Layers } from "lucide-react";
+import { formatNumber } from "@/utils/formatNumber";
 
-function formatNumber(n: number): string {
-  if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + "M";
-  if (n >= 1_000) return (n / 1_000).toFixed(1) + "K";
-  return n.toString();
-}
 
-function formatDuration(start: string, end: string | null): string {
+const formatDuration = (start: string, end: string | null): string => {
   if (!end) return "In progress";
   const diff = new Date(end).getTime() - new Date(start).getTime();
   const mins = Math.floor(diff / 60000);
@@ -22,7 +18,7 @@ function formatDuration(start: string, end: string | null): string {
   return `${hrs}h ${remainMins}m`;
 }
 
-function formatDateTime(dateStr: string): string {
+const formatDateTime = (dateStr: string): string => {
   return new Date(dateStr).toLocaleString("en-US", {
     month: "short",
     day: "numeric",
@@ -31,7 +27,7 @@ function formatDateTime(dateStr: string): string {
   });
 }
 
-export default function FetcherDetailPageContainer() {
+export const FetcherDetailPageContainer = () => {
   const { id } = useParams();
   const fetcher = mockFetchers.find((f) => f.fetcherId === id);
   const runs = mockRuns.filter((r) => r.fetcherId === id);
