@@ -60,7 +60,7 @@ const levelStyles: Record<string, string> = {
   error: "text-destructive bg-destructive/10",
 };
 
-export default function LogsPageContainer() {
+export const LogsPageContainer = () => {
   const [SearchQuery, setSearchQuery] = useState("");
 
   const searchFilterItems = mockLogs.filter((log) =>
