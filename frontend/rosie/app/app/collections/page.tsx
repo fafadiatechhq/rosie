@@ -1,9 +1,12 @@
-import CollectionPageContainer from "@/components/collections/CollectionPageContainer";
-import React from 'react'
+import AppLayout from "@/components/AppLayout";
+import { CollectionPageContainer } from "@/components/collections/CollectionPageContainer";
 
-export default function CollectionPage() {
+const CollectionPage = () => {
   return (
-    <React.Fragment> 
+    <AppLayout>
       <CollectionPageContainer />
-      </React.Fragment>
-)}
+    </AppLayout>
+  );
+};
+
+export default CollectionPage;

@@ -13,14 +13,9 @@ import {
   mockFetchers as initialMockFetchers,
 } from "@/utils/mock-data";
 import { StatusBadge } from "@/components/StatusBadge";
+import { formatNumber } from "@/utils/formatNumber";
 
-function formatNumber(n: number): string {
-  if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + "M";
-  if (n >= 1_000) return (n / 1_000).toFixed(1) + "K";
-  return n.toString();
-}
-
-export function CollectionDetailPageContainer() {
+export const CollectionDetailPageContainer = () => {
   const { id } = useParams();
   const { toast } = useToast();
   const [showCreateFetcher, setShowCreateFetcher] = useState(false);
