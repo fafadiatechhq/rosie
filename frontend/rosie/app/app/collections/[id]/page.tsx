@@ -2,10 +2,11 @@ import AppLayout from "@/components/AppLayout";
 import { CollectionDetailPageContainer } from "@/components/collections/CollectionDetailPageContainer";
 import React from "react";
 
-export default function CollectionDetailPage() {
+const CollectionDetailPage = () => {
   return (
     <AppLayout>
       <CollectionDetailPageContainer />
     </AppLayout>
   );
 }
+export default CollectionDetailPage;

@@ -1,10 +1,12 @@
 import AppLayout from "@/components/AppLayout";
-import CollectionPageContainer from "@/components/collections/CollectionPageContainer";
+import { CollectionPageContainer } from "@/components/collections/CollectionPageContainer";
 
-
-export default function CollectionPage() {
+const CollectionPage = () => {
   return (
-    <AppLayout> 
+    <AppLayout>
       <CollectionPageContainer />
-      </AppLayout>
-)}
+    </AppLayout>
+  );
+};
+
+export default CollectionPage;
