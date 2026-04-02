@@ -4,12 +4,7 @@ import { StatusBadge } from "@/components/StatusBadge";
 import { Building2, Search, Filter } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-
-const formatNumber = (n: number): string => {
-  if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + "M";
-  if (n >= 1_000) return (n / 1_000).toFixed(1) + "K";
-  return n.toString();
-}
+import { formatNumber } from "@/utils/formatNumber";
 
 const timeAgo = (dateStr: string): string => {
   const diff = Date.now() - new Date(dateStr).getTime();
