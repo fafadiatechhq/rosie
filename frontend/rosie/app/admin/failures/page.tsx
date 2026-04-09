@@ -1,7 +1,7 @@
 import AdminLayout from "@/components/admin/AdminLayout";
 import FailuresContainer from "@/components/admin/FailuresContainer";
 
-const FailuresPage = () => {
+const AdminFailurePage = () => {
   return (
     <AdminLayout>
       <FailuresContainer />
@@ -9,4 +9,4 @@ const FailuresPage = () => {
   );
 };
 
-export default FailuresPage;
+export default AdminFailurePage;
