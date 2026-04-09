@@ -1,12 +1,12 @@
-import AdminLayout from '@/components/admin/AdminLayout'
-import GlobalLogsContainer from '@/components/admin/GlobalLogsContainer'
+import AdminLayout from "@/components/admin/AdminLayout";
+import GlobalLogsContainer from "@/components/admin/GlobalLogsContainer";
 
-const LogsPage = () => {
+const AdminLogsPage = () => {
   return (
     <AdminLayout>
-      <GlobalLogsContainer/>
+      <GlobalLogsContainer />
     </AdminLayout>
-  )
-}
+  );
+};
 
-export default LogsPage;
+export default AdminLogsPage;
