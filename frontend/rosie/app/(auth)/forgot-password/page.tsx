@@ -1,5 +1,5 @@
 import ForgotPasswordContainer from "@/components/auth/ForgotPasswordContainer";
-const forgotPasswordPage = () => {
+const ForgotPasswordPage = () => {
   return (
     <>
       <ForgotPasswordContainer />
@@ -7,4 +7,4 @@ const forgotPasswordPage = () => {
   );
 };
 
-export default forgotPasswordPage;
+export default ForgotPasswordPage;
