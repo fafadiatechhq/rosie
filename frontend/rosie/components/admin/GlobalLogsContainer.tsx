@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/utils/utils";
 import { timeAgo } from "@/utils/timeAgo";
 
-export const GlobalLogsContainer = () => {
+ const GlobalLogsContainer = () => {
   const [levelFilter, setLevelFilter] = useState<string>("all");
   const [search, setSearch] = useState("");
 
@@ -111,3 +111,5 @@ export const GlobalLogsContainer = () => {
     </div>
   );
 };
+
+export default GlobalLogsContainer;

@@ -1,7 +1,7 @@
 import AdminLayout from '@/components/admin/AdminLayout'
-import { GlobalLogsContainer } from '@/components/admin/GlobalLogsContainer'
+import GlobalLogsContainer from '@/components/admin/GlobalLogsContainer'
 
-const RetentionPage = () => {
+const LogsPage = () => {
   return (
     <AdminLayout>
       <GlobalLogsContainer/>
@@ -9,4 +9,4 @@ const RetentionPage = () => {
   )
 }
 
-export default RetentionPage
+export default LogsPage;
