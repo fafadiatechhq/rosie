@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head><title>Generate Rosie Icons</title></head>
+<body>
+<h3>Rosie Icon Generator</h3>
+<p>Click the buttons below to download each icon size.</p>
+<div id="canvases"></div>
+<script>
+const sizes = [16, 48, 128];
+
+function drawIcon(size) {
+  const canvas = document.createElement('canvas');
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext('2d');
+  const s = size;
+
+  // Background circle
+  ctx.beginPath();
+  ctx.arc(s/2, s/2, s/2, 0, Math.PI*2);
+  ctx.fillStyle = '#2A5D67';
+  ctx.fill();
+
+  // White outer eye ring
+  ctx.beginPath();
+  ctx.arc(s/2, s/2, s*0.30, 0, Math.PI*2);
+  ctx.fillStyle = '#ffffff';
+  ctx.fill();
+
+  // Teal iris
+  ctx.beginPath();
+  ctx.arc(s/2, s/2, s*0.20, 0, Math.PI*2);
+  ctx.fillStyle = '#2A5D67';
+  ctx.fill();
+
+  // Accent pupil
+  ctx.beginPath();
+  ctx.arc(s/2, s/2, s*0.10, 0, Math.PI*2);
+  ctx.fillStyle = '#F87171';
+  ctx.fill();
+
+  return canvas;
+}
+
+const wrap = document.getElementById('canvases');
+sizes.forEach(size => {
+  const canvas = drawIcon(size);
+  const label = document.createElement('p');
+  label.textContent = `${size}x${size}:`;
+  wrap.appendChild(label);
+  wrap.appendChild(canvas);
+
+  const btn = document.createElement('button');
+  btn.textContent = `Download icon${size}.png`;
+  btn.onclick = () => {
+    const link = document.createElement('a');
+    link.download = `icon${size}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  };
+  wrap.appendChild(btn);
+  wrap.appendChild(document.createElement('br'));
+});
+</script>
+</body>
+</html>
