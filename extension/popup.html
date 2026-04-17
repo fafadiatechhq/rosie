@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rosie</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="app">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" stroke="#F87171" stroke-width="2"/>
+            <path d="M8 12s1.5-3 4-3 4 3 4 3-1.5 3-4 3-4-3-4-3z" fill="#F87171"/>
+            <circle cx="12" cy="12" r="1.5" fill="#fff"/>
+          </svg>
+          <span class="logo-text">Rosie</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <!-- Scrape -->
+        <div class="nav-item" data-view="scrape" data-nav="scrape">
+          <div class="nav-label">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+            </svg>
+            <span>Scrape</span>
+          </div>
+        </div>
+
+        <!-- New -->
+        <div class="nav-group" data-group="new">
+          <div class="nav-item has-children" data-nav="new">
+            <div class="nav-label">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="16"/>
+                <line x1="8" y1="12" x2="16" y2="12"/>
+              </svg>
+              <span>New</span>
+            </div>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </div>
+          <div class="nav-children">
+            <div class="nav-child" data-view="new-monitor" data-nav="new-monitor">
+              <svg class="nav-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                <path d="M8 21h8M12 17v4"/>
+                <circle cx="12" cy="10" r="2"/>
+                <path d="M12 8v-2M12 14v-2M10 10H8M16 10h-2"/>
+              </svg>
+              Monitor Page
+            </div>
+            <div class="nav-child" data-view="new-crawl" data-nav="new-crawl">
+              <svg class="nav-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="5" r="3"/>
+                <circle cx="5" cy="19" r="3"/>
+                <circle cx="19" cy="19" r="3"/>
+                <line x1="12" y1="8" x2="5.5" y2="16.5"/>
+                <line x1="12" y1="8" x2="18.5" y2="16.5"/>
+              </svg>
+              Crawl Site
+            </div>
+          </div>
+        </div>
+
+        <!-- Existing -->
+        <div class="nav-group" data-group="existing">
+          <div class="nav-item has-children" data-nav="existing">
+            <div class="nav-label">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="8" y1="6" x2="21" y2="6"/>
+                <line x1="8" y1="12" x2="21" y2="12"/>
+                <line x1="8" y1="18" x2="21" y2="18"/>
+                <line x1="3" y1="6" x2="3.01" y2="6"/>
+                <line x1="3" y1="12" x2="3.01" y2="12"/>
+                <line x1="3" y1="18" x2="3.01" y2="18"/>
+              </svg>
+              <span>Existing</span>
+            </div>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </div>
+          <div class="nav-children">
+            <div class="nav-child" data-view="existing-jobs" data-nav="existing-jobs">
+              <svg class="nav-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="5 3 19 12 5 21 5 3"/>
+              </svg>
+              Run / Pause
+            </div>
+            <div class="nav-child" data-view="existing-logs" data-nav="existing-logs">
+              <svg class="nav-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+              </svg>
+              Logs
+            </div>
+            <div class="nav-child" data-view="existing-export" data-nav="existing-export">
+              <svg class="nav-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              Export
+            </div>
+          </div>
+        </div>
+
+        <!-- Settings -->
+        <div class="nav-group" data-group="settings">
+          <div class="nav-item has-children" data-nav="settings">
+            <div class="nav-label">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+              </svg>
+              <span>Settings</span>
+            </div>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </div>
+          <div class="nav-children">
+            <div class="nav-child" data-view="settings-collections" data-nav="settings-collections">
+              <svg class="nav-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+              </svg>
+              Collections
+            </div>
+            <div class="nav-child" data-view="settings-usage" data-nav="settings-usage">
+              <svg class="nav-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="20" x2="18" y2="10"/>
+                <line x1="12" y1="20" x2="12" y2="4"/>
+                <line x1="6" y1="20" x2="6" y2="14"/>
+              </svg>
+              Usage
+            </div>
+            <div class="nav-child" data-view="settings-billing" data-nav="settings-billing">
+              <svg class="nav-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                <line x1="1" y1="10" x2="23" y2="10"/>
+              </svg>
+              Billing
+            </div>
+          </div>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content">
+
+      <!-- Scrape View -->
+      <section class="view active" id="view-scrape">
+        <div class="view-header">
+          <h2>Quick Scrape</h2>
+          <p class="view-subtitle">Extract data from any page instantly</p>
+        </div>
+        <div class="form-group">
+          <label>Page URL</label>
+          <div class="input-with-btn">
+            <input type="url" class="input" id="scrape-url" placeholder="https://example.com" />
+            <button class="btn-icon" id="use-current-tab" title="Use current tab">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                <path d="M8 21h8M12 17v4"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>CSS Selector <span class="optional">(optional)</span></label>
+          <input type="text" class="input" placeholder="e.g. .product-price, h1, table" />
+        </div>
+        <div class="form-group">
+          <label>Extract</label>
+          <div class="checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" checked /> Text content
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" /> Links
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" /> Images
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" /> Tables
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Save to Collection</label>
+          <select class="input">
+            <option value="">— Don't save —</option>
+            <option>Default</option>
+            <option>Research</option>
+            <option>Prices</option>
+          </select>
+        </div>
+        <button class="btn-primary full-width">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+          </svg>
+          Run Scrape
+        </button>
+      </section>
+
+      <!-- New: Monitor Page View -->
+      <section class="view" id="view-new-monitor">
+        <div class="view-header">
+          <h2>Monitor Page</h2>
+          <p class="view-subtitle">Watch for changes and get notified</p>
+        </div>
+        <div class="form-group">
+          <label>Page URL</label>
+          <input type="url" class="input" placeholder="https://example.com/page" />
+        </div>
+        <div class="form-group">
+          <label>Monitor Name</label>
+          <input type="text" class="input" placeholder="e.g. Product Price Watch" />
+        </div>
+        <div class="form-group">
+          <label>Watch Selector <span class="optional">(optional)</span></label>
+          <input type="text" class="input" placeholder="e.g. .price, #stock-status" />
+          <p class="hint">Leave blank to monitor the entire page</p>
+        </div>
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label>Check Every</label>
+            <input type="number" class="input" value="6" min="1" />
+          </div>
+          <div class="form-group flex-1">
+            <label>Interval</label>
+            <select class="input">
+              <option>Hours</option>
+              <option>Days</option>
+              <option>Minutes</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Alert Condition</label>
+          <select class="input">
+            <option>Any change detected</option>
+            <option>Content added</option>
+            <option>Content removed</option>
+            <option>Price drops</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Save to Collection</label>
+          <select class="input">
+            <option>Default</option>
+            <option>Research</option>
+            <option>Prices</option>
+          </select>
+        </div>
+        <button class="btn-primary full-width">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <path d="M8 21h8M12 17v4"/>
+            <circle cx="12" cy="10" r="2"/>
+          </svg>
+          Save Monitor
+        </button>
+      </section>
+
+      <!-- New: Crawl Site View -->
+      <section class="view" id="view-new-crawl">
+        <div class="view-header">
+          <h2>Crawl Site</h2>
+          <p class="view-subtitle">Systematically extract data across a website</p>
+        </div>
+        <div class="form-group">
+          <label>Start URL</label>
+          <input type="url" class="input" placeholder="https://example.com" />
+        </div>
+        <div class="form-group">
+          <label>Job Name</label>
+          <input type="text" class="input" placeholder="e.g. Example.com Product Crawl" />
+        </div>
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label>Max Depth</label>
+            <input type="number" class="input" value="3" min="1" max="10" />
+          </div>
+          <div class="form-group flex-1">
+            <label>Max Pages</label>
+            <input type="number" class="input" value="100" min="1" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>URL Pattern Filter <span class="optional">(optional)</span></label>
+          <input type="text" class="input" placeholder="e.g. /products/, /blog/" />
+          <p class="hint">Only crawl URLs matching this pattern</p>
+        </div>
+        <div class="form-group">
+          <label>Extract from each page</label>
+          <div class="checkbox-group">
+            <label class="checkbox-label"><input type="checkbox" checked /> Page title</label>
+            <label class="checkbox-label"><input type="checkbox" checked /> Body text</label>
+            <label class="checkbox-label"><input type="checkbox" /> All links</label>
+            <label class="checkbox-label"><input type="checkbox" /> Images</label>
+            <label class="checkbox-label"><input type="checkbox" /> Metadata</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Save to Collection</label>
+          <select class="input">
+            <option>Default</option>
+            <option>Research</option>
+            <option>+ Create new...</option>
+          </select>
+        </div>
+        <button class="btn-primary full-width">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="5" r="3"/>
+            <circle cx="5" cy="19" r="3"/>
+            <circle cx="19" cy="19" r="3"/>
+            <line x1="12" y1="8" x2="5.5" y2="16.5"/>
+            <line x1="12" y1="8" x2="18.5" y2="16.5"/>
+          </svg>
+          Start Crawl
+        </button>
+      </section>
+
+      <!-- Existing: Run/Pause View -->
+      <section class="view" id="view-existing-jobs">
+        <div class="view-header">
+          <h2>Jobs</h2>
+          <p class="view-subtitle">Manage your active monitors and crawls</p>
+        </div>
+        <div class="jobs-list">
+          <div class="job-card">
+            <div class="job-info">
+              <div class="job-title">Amazon Price Watch</div>
+              <div class="job-meta">Monitor · Every 6h · 3 changes</div>
+            </div>
+            <div class="job-actions">
+              <span class="badge badge-running">Running</span>
+              <button class="btn-icon-sm" title="Pause">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="6" y="4" width="4" height="16"/>
+                  <rect x="14" y="4" width="4" height="16"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="job-card">
+            <div class="job-info">
+              <div class="job-title">Tech Blog Crawl</div>
+              <div class="job-meta">Crawl · 247 pages · Last: 2h ago</div>
+            </div>
+            <div class="job-actions">
+              <span class="badge badge-paused">Paused</span>
+              <button class="btn-icon-sm" title="Resume">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="job-card">
+            <div class="job-info">
+              <div class="job-title">Competitor Site Monitor</div>
+              <div class="job-meta">Monitor · Every 12h · 0 changes</div>
+            </div>
+            <div class="job-actions">
+              <span class="badge badge-running">Running</span>
+              <button class="btn-icon-sm" title="Pause">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="6" y="4" width="4" height="16"/>
+                  <rect x="14" y="4" width="4" height="16"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="job-card">
+            <div class="job-info">
+              <div class="job-title">News Aggregator</div>
+              <div class="job-meta">Crawl · 512 pages · Completed</div>
+            </div>
+            <div class="job-actions">
+              <span class="badge badge-done">Done</span>
+              <button class="btn-icon-sm" title="Re-run">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="23 4 23 10 17 10"/>
+                  <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <button class="btn-secondary full-width mt-8">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="16"/>
+            <line x1="8" y1="12" x2="16" y2="12"/>
+          </svg>
+          New Job
+        </button>
+      </section>
+
+      <!-- Existing: Logs View -->
+      <section class="view" id="view-existing-logs">
+        <div class="view-header">
+          <h2>Logs</h2>
+          <p class="view-subtitle">Activity and error logs for your jobs</p>
+        </div>
+        <div class="form-group">
+          <label>Job</label>
+          <select class="input">
+            <option>Amazon Price Watch</option>
+            <option>Tech Blog Crawl</option>
+            <option>Competitor Site Monitor</option>
+            <option>News Aggregator</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label>Level</label>
+            <select class="input">
+              <option>All</option>
+              <option>Info</option>
+              <option>Warning</option>
+              <option>Error</option>
+            </select>
+          </div>
+          <div class="form-group flex-1">
+            <label>Period</label>
+            <select class="input">
+              <option>Last 24h</option>
+              <option>Last 7 days</option>
+              <option>All time</option>
+            </select>
+          </div>
+        </div>
+        <div class="log-console">
+          <div class="log-entry log-info">
+            <span class="log-time">14:32:01</span>
+            <span class="log-level info">INFO</span>
+            <span class="log-msg">Fetched https://amazon.com/product/123</span>
+          </div>
+          <div class="log-entry log-info">
+            <span class="log-time">14:32:03</span>
+            <span class="log-level info">INFO</span>
+            <span class="log-msg">Price changed: $24.99 → $19.99</span>
+          </div>
+          <div class="log-entry log-warn">
+            <span class="log-time">14:32:05</span>
+            <span class="log-level warn">WARN</span>
+            <span class="log-msg">Rate limit detected, backing off 30s</span>
+          </div>
+          <div class="log-entry log-info">
+            <span class="log-time">14:32:38</span>
+            <span class="log-level info">INFO</span>
+            <span class="log-msg">Resuming after backoff</span>
+          </div>
+          <div class="log-entry log-error">
+            <span class="log-time">14:33:10</span>
+            <span class="log-level error">ERR</span>
+            <span class="log-msg">Failed to parse selector .price on /product/456</span>
+          </div>
+          <div class="log-entry log-info">
+            <span class="log-time">14:34:00</span>
+            <span class="log-level info">INFO</span>
+            <span class="log-msg">Cycle complete. Next run in 6h</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Existing: Export View -->
+      <section class="view" id="view-existing-export">
+        <div class="view-header">
+          <h2>Export Data</h2>
+          <p class="view-subtitle">Download your scraped data</p>
+        </div>
+        <div class="form-group">
+          <label>Source</label>
+          <select class="input">
+            <option>All Collections</option>
+            <option>Default</option>
+            <option>Research</option>
+            <option>Prices</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Job Filter <span class="optional">(optional)</span></label>
+          <select class="input">
+            <option value="">All Jobs</option>
+            <option>Amazon Price Watch</option>
+            <option>Tech Blog Crawl</option>
+            <option>Competitor Site Monitor</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label>From</label>
+            <input type="date" class="input" />
+          </div>
+          <div class="form-group flex-1">
+            <label>To</label>
+            <input type="date" class="input" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Format</label>
+          <div class="format-options">
+            <label class="format-option selected" data-format="csv">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+              </svg>
+              CSV
+            </label>
+            <label class="format-option" data-format="json">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="16 18 22 12 16 6"/>
+                <polyline points="8 6 2 12 8 18"/>
+              </svg>
+              JSON
+            </label>
+            <label class="format-option" data-format="xlsx">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <path d="M3 9h18M3 15h18M9 3v18"/>
+              </svg>
+              XLSX
+            </label>
+          </div>
+        </div>
+        <div class="export-summary">
+          <span class="summary-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="12"/>
+              <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+          </span>
+          <span>Estimated export: <strong>2,847 rows</strong> across 4 jobs</span>
+        </div>
+        <button class="btn-primary full-width">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Download Export
+        </button>
+      </section>
+
+      <!-- Settings: Collections View -->
+      <section class="view" id="view-settings-collections">
+        <div class="view-header">
+          <h2>Collections</h2>
+          <p class="view-subtitle">Organize your scraped data into collections</p>
+        </div>
+        <div class="collections-list">
+          <div class="collection-card">
+            <div class="collection-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+              </svg>
+            </div>
+            <div class="collection-info">
+              <div class="collection-name">Default</div>
+              <div class="collection-meta">1,203 records · 12 jobs</div>
+            </div>
+            <div class="collection-actions">
+              <button class="btn-icon-xs" title="Edit">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                  <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                </svg>
+              </button>
+              <button class="btn-icon-xs danger" title="Delete">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="3 6 5 6 21 6"/>
+                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="collection-card">
+            <div class="collection-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+              </svg>
+            </div>
+            <div class="collection-info">
+              <div class="collection-name">Research</div>
+              <div class="collection-meta">847 records · 5 jobs</div>
+            </div>
+            <div class="collection-actions">
+              <button class="btn-icon-xs" title="Edit">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                  <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                </svg>
+              </button>
+              <button class="btn-icon-xs danger" title="Delete">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="3 6 5 6 21 6"/>
+                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="collection-card">
+            <div class="collection-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+              </svg>
+            </div>
+            <div class="collection-info">
+              <div class="collection-name">Prices</div>
+              <div class="collection-meta">2,847 records · 8 jobs</div>
+            </div>
+            <div class="collection-actions">
+              <button class="btn-icon-xs" title="Edit">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                  <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                </svg>
+              </button>
+              <button class="btn-icon-xs danger" title="Delete">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="3 6 5 6 21 6"/>
+                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="form-group">
+          <label>New Collection</label>
+          <div class="input-with-btn">
+            <input type="text" class="input" placeholder="Collection name" />
+            <button class="btn-primary-sm">Create</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Settings: Usage View -->
+      <section class="view" id="view-settings-usage">
+        <div class="view-header">
+          <h2>Usage</h2>
+          <p class="view-subtitle">Your usage this billing period</p>
+        </div>
+        <div class="usage-grid">
+          <div class="usage-card">
+            <div class="usage-value">4,897</div>
+            <div class="usage-label">Pages Scraped</div>
+            <div class="usage-bar-wrap">
+              <div class="usage-bar" style="width: 49%"></div>
+            </div>
+            <div class="usage-limit">10,000 limit</div>
+          </div>
+          <div class="usage-card">
+            <div class="usage-value">17</div>
+            <div class="usage-label">Active Jobs</div>
+            <div class="usage-bar-wrap">
+              <div class="usage-bar" style="width: 34%"></div>
+            </div>
+            <div class="usage-limit">50 limit</div>
+          </div>
+          <div class="usage-card">
+            <div class="usage-value">142 MB</div>
+            <div class="usage-label">Data Stored</div>
+            <div class="usage-bar-wrap">
+              <div class="usage-bar" style="width: 14%"></div>
+            </div>
+            <div class="usage-limit">1 GB limit</div>
+          </div>
+          <div class="usage-card">
+            <div class="usage-value">312</div>
+            <div class="usage-label">Exports</div>
+            <div class="usage-bar-wrap">
+              <div class="usage-bar warning" style="width: 78%"></div>
+            </div>
+            <div class="usage-limit">400 limit</div>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="period-info">
+          <span>Billing period resets in <strong>12 days</strong></span>
+          <a href="#" class="link">View history</a>
+        </div>
+      </section>
+
+      <!-- Settings: Billing View -->
+      <section class="view" id="view-settings-billing">
+        <div class="view-header">
+          <h2>Billing</h2>
+          <p class="view-subtitle">Manage your plan and payment</p>
+        </div>
+        <div class="plan-card current-plan">
+          <div class="plan-badge">Current Plan</div>
+          <div class="plan-name">Pro</div>
+          <div class="plan-price">$19<span>/mo</span></div>
+          <ul class="plan-features">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              10,000 pages / month
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              50 concurrent jobs
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              1 GB storage
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              API access
+            </li>
+          </ul>
+        </div>
+        <div class="billing-actions">
+          <button class="btn-primary full-width">Upgrade to Business</button>
+          <button class="btn-ghost full-width">Manage Payment Method</button>
+          <button class="btn-ghost full-width danger-text">Cancel Subscription</button>
+        </div>
+        <div class="divider"></div>
+        <div class="billing-info">
+          <div class="billing-row">
+            <span>Next billing date</span>
+            <strong>Apr 12, 2026</strong>
+          </div>
+          <div class="billing-row">
+            <span>Payment method</span>
+            <strong>Visa ···· 4242</strong>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
