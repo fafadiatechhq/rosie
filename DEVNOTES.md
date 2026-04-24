@@ -46,37 +46,164 @@ To stop `docker compose down`
 We use VS Code Dev Containers for local development. [Official reference](https://code.visualstudio.com/docs/devcontainers/containers)
 
 
-Prerequisites
+##  Prerequisites
 
-Make sure the following are installed:
+### 1. Install Docker & Docker Compose
 
-1. Docker
-1. Docker Compose
-1. VS Code
-1. Dev Containers extension (Microsoft)
+####  Install Docker (Ubuntu/Linux)
 
-#### Steps
+``` bash
+sudo apt update
+sudo apt install -y docker.io
+sudo systemctl start docker
+sudo systemctl enable docker
+```
 
-1. Clone the repository
-   ```sh
-   git clone <repo-url>
-   cd <repo-name>
-   ```
-1. Create environment file `cp .env.template .env`
-1. Open project in VS Code
-   ```sh
-   cd <repo-name>
-   code .
-   ```
-1. Inside VS Code: Press: `Ctrl + Shift + P ` or `F1`
-1. Select: `Dev Containers: Reopen in Container`
-1. Wait for Docker to build the dev container.
+####  Add your user to Docker group (avoid sudo)
+
+``` bash
+sudo usermod -aG docker $USER
+newgrp docker
+```
+
+####  Verify installation
+
+``` bash
+docker --version
+docker compose version
+```
 
 
-VS Code will automatically:
 
-1. Use `.devcontainer/devcontainer.json`
-1. Run `docker-compose.dev.yml`
-1.  Attach to the `django` service
+### 2. Install VS Code
 
-After build completes, you are inside the development container.
+Download and install from: https://code.visualstudio.com/
+
+
+
+### 3. Install Required VS Code Extension
+
+Open VS Code → Extensions → install:
+
+-   **Dev Containers** (by Microsoft)
+
+
+
+##  Project Setup
+
+### 1. Create a working directory
+
+``` bash
+mkdir ~/Code
+cd ~/Code
+```
+
+
+
+### 2. Clone the repository
+
+``` bash
+git clone <your-repo-url>
+cd rosie
+```
+
+
+
+### 3. Setup environment variables
+
+Go to backend directory:
+
+``` bash
+cd backend/rosie
+```
+
+Copy example env file:
+
+``` bash
+cp example.env .env
+```
+
+
+
+##  Running the Project
+
+### 1. Open project in VS Code
+
+From project root:
+
+``` bash
+code .
+```
+
+
+
+### 2. Reopen in Dev Container
+
+-   Press: `Ctrl + Shift + P`
+-   Search: **Dev Containers: Reopen in Container**
+-   Click it
+
+⏳ It will take \~5--10 minutes to: - Build Docker images - Start
+containers - Install dependencies
+
+
+
+##  Verify Containers
+
+To check running containers:
+
+``` bash
+docker ps
+```
+
+You should see: - Backend (Django) - Frontend - PostgreSQL
+
+
+
+##  Access the Application
+
+  Service    URL
+  ---------- -----------------------
+  Backend    http://localhost:8000
+  Frontend   http://localhost:3000
+
+
+
+##  Django Admin Credentials
+
+Check your `.env` file:
+
+``` env
+DJANGO_SUPERUSER_USERNAME=newscout
+DJANGO_SUPERUSER_PASSWORD=newscout
+```
+
+Use these credentials to log in.
+
+
+
+##  Notes
+
+-   Containers start automatically via Dev Container setup
+-   No need to manually run migrations or create superuser
+-   Everything is handled via Docker + entrypoint script
+
+
+
+##  Troubleshooting
+
+### Containers not running?
+
+``` bash
+docker ps -a
+docker logs <container-name>
+```
+
+
+
+### Rebuild containers
+
+``` bash
+docker compose down -v
+docker compose up --build
+```
