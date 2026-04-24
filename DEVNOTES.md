@@ -13,44 +13,50 @@ These are general develop instructions
 
 These are general development instructions for setting up the project.
 
-1. Option 1: Docker Setup (Without Dev Container) 
-1. Option 2: VS Code Dev Container Setup
+1.  Option 1: Docker Setup (Without Dev Container)
+2.  Option 2: VS Code Dev Container Setup
 
-**Note:** Devcontainers have a good IDE integration as opposed to running `docker compose up`
+**Note:** Devcontainers have a good IDE integration as opposed to
+running `docker compose up.`
 
 ### Option 1: Docker Setup (Without Dev Container)
 
 Prerequisites:
 
-1. Docker installed
-1. Docker Compose installed
+1.  Docker installed
+2.  Docker Compose installed
 
 #### Steps
 
-1. Clone the repository
-   ```sh
-   git clone <repo-url>
-   cd <repo-name>
-   ```
-1. Create environment file `cp .env.template .env`
-1. Build Docker images `docker compose build`
-1. Start the containers `docker compose up -d`
-1. Check running containers `docker compose ps`
+1.  Clone the repository
+
+    ``` sh
+    git clone <repo-url>
+    cd <repo-name>
+    ```
+
+2.  Create environment file `cp example.env .env.`
+
+3.  Build Docker images `docker compose build.`
+
+4.  Start the containers `docker compose up -d.`
+
+5.  Check running containers `docker compose ps`
 
 The application should now be running.
 
-To stop `docker compose down`
+To stop `docker compose down.`
 
-### Option 2: VS Code Dev Container Setup
+### Option 2: Docker Setup (Using Dev Container)
 
-We use VS Code Dev Containers for local development. [Official reference](https://code.visualstudio.com/docs/devcontainers/containers)
+This guide will help you set up the rosie project using **Docker + VS
+Code Dev Containers**.
 
-
-##  Prerequisites
+## Prerequisites
 
 ### 1. Install Docker & Docker Compose
 
-####  Install Docker (Ubuntu/Linux)
+#### Install Docker (Ubuntu/Linux)
 
 ``` bash
 sudo apt update
@@ -59,27 +65,23 @@ sudo systemctl start docker
 sudo systemctl enable docker
 ```
 
-####  Add your user to Docker group (avoid sudo)
+#### Add your user to Docker group (avoid sudo)
 
 ``` bash
 sudo usermod -aG docker $USER
 newgrp docker
 ```
 
-####  Verify installation
+#### Verify installation
 
 ``` bash
 docker --version
 docker compose version
 ```
 
-
-
 ### 2. Install VS Code
 
 Download and install from: https://code.visualstudio.com/
-
-
 
 ### 3. Install Required VS Code Extension
 
@@ -87,9 +89,7 @@ Open VS Code → Extensions → install:
 
 -   **Dev Containers** (by Microsoft)
 
-
-
-##  Project Setup
+## Project Setup
 
 ### 1. Create a working directory
 
@@ -98,8 +98,6 @@ mkdir ~/Code
 cd ~/Code
 ```
 
-
-
 ### 2. Clone the repository
 
 ``` bash
@@ -107,11 +105,9 @@ git clone <your-repo-url>
 cd rosie
 ```
 
+### 3. Set up environment variables
 
-
-### 3. Setup environment variables
-
-Go to backend directory:
+Go to the backend directory:
 
 ``` bash
 cd backend/rosie
@@ -123,19 +119,15 @@ Copy example env file:
 cp example.env .env
 ```
 
+## Running the Project
 
-
-##  Running the Project
-
-### 1. Open project in VS Code
+### 1. Open the project in VS Code
 
 From project root:
 
 ``` bash
-code .
+code.
 ```
-
-
 
 ### 2. Reopen in Dev Container
 
@@ -143,12 +135,10 @@ code .
 -   Search: **Dev Containers: Reopen in Container**
 -   Click it
 
-⏳ It will take \~5--10 minutes to: - Build Docker images - Start
+It will take \~5--10 minutes to: - Build Docker images - Start
 containers - Install dependencies
 
-
-
-##  Verify Containers
+## Verify Containers
 
 To check running containers:
 
@@ -158,18 +148,14 @@ docker ps
 
 You should see: - Backend (Django) - Frontend - PostgreSQL
 
-
-
-##  Access the Application
+## Access the Application
 
   Service    URL
   ---------- -----------------------
   Backend    http://localhost:8000
   Frontend   http://localhost:3000
 
-
-
-##  Django Admin Credentials
+## Django Admin Credentials
 
 Check your `.env` file:
 
@@ -180,17 +166,13 @@ DJANGO_SUPERUSER_PASSWORD=newscout
 
 Use these credentials to log in.
 
+## Notes
 
-
-##  Notes
-
--   Containers start automatically via Dev Container setup
--   No need to manually run migrations or create superuser
+-   Containers start automatically via the Dev Container setup
+-   No need to manually run migrations or create a superuser
 -   Everything is handled via Docker + entrypoint script
 
-
-
-##  Troubleshooting
+## Troubleshooting
 
 ### Containers not running?
 
@@ -199,11 +181,8 @@ docker ps -a
 docker logs <container-name>
 ```
 
-
-
 ### Rebuild containers
 
 ``` bash
-docker compose down -v
-docker compose up --build
+docker compose down -v docker compose up --build
 ```
