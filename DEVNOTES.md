@@ -160,8 +160,8 @@ You should see: - Backend (Django) - Frontend - PostgreSQL
 Check your `.env` file:
 
 ``` env
-DJANGO_SUPERUSER_USERNAME=newscout
-DJANGO_SUPERUSER_PASSWORD=newscout
+DJANGO_SUPERUSER_USERNAME=rosie
+DJANGO_SUPERUSER_PASSWORD=admin123
 ```
 
 Use these credentials to log in.
