@@ -105,9 +105,15 @@ git clone <your-repo-url>
 cd rosie
 ```
 
+<<<<<<< HEAD
 ### 3. Set up environment variables
 
 Go to the backend directory:
+=======
+### 3. Setup environment variables
+
+Go to backend directory:
+>>>>>>> 584f43a (add new files)
 
 ``` bash
 cd backend/rosie
@@ -121,7 +127,11 @@ cp example.env .env
 
 ## Running the Project
 
+<<<<<<< HEAD
 ### 1. Open the project in VS Code
+=======
+### 1. Open project in VS Code
+>>>>>>> 584f43a (add new files)
 
 From project root:
 
@@ -168,8 +178,13 @@ Use these credentials to log in.
 
 ## Notes
 
+<<<<<<< HEAD
 -   Containers start automatically via the Dev Container setup
 -   No need to manually run migrations or create a superuser
+=======
+-   Containers start automatically via Dev Container setup
+-   No need to manually run migrations or create superuser
+>>>>>>> 584f43a (add new files)
 -   Everything is handled via Docker + entrypoint script
 
 ## Troubleshooting
@@ -183,6 +198,10 @@ docker logs <container-name>
 
 ### Rebuild containers
 
+<<<<<<< HEAD
 ``` bash
 docker compose down -v docker compose up --build
 ```
+=======
+\`\`\` bash docker compose down -v docker compose up --build
+>>>>>>> 584f43a (add new files)
