@@ -1,0 +1,5 @@
+https://indianexpress.com/news-sitemap.xml
+https://www.which.co.uk/news/sitemaps/news.xml
+https://www.dailymail.co.uk/google-news-sitemap1.xml
+https://www.cbssports.com/news-sitemap.xml
+https://www.express.co.uk/
