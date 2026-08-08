@@ -1,5 +1,9 @@
 # Rosie
 
+<p align="center">
+  <img src="logo.png" alt="Rosie" width="300" />
+</p>
+
 Rosie is a web scraping and monitoring platform that lets you extract data from any website, track changes over time, and export results — without writing code.
 
 ---
