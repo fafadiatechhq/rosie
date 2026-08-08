@@ -1,0 +1,98 @@
+---
+sidebar_label: Fetchers
+hide_table_of_contents: true
+title: Fetchers
+---
+
+import InfoCards from '@site/src/components/docs/InfoCards';
+
+# Fetchers
+
+A fetcher is a crawl job. Each fetcher belongs to exactly one collection and defines what to crawl, how deep, and on what schedule.
+
+## Fetcher Types
+
+<InfoCards
+  items={[
+    {
+      title: 'Seedlist',
+      description:
+        'Crawl from an explicit list of seed URLs. Best for targeted scraping.',
+    },
+    {
+      title: 'Monitor',
+      description:
+        'Track changes on specific pages over time. Ideal for price monitoring.',
+    },
+    {
+      title: 'Full Site',
+      description:
+        'Crawl an entire website starting from the root. Good for archiving.',
+    },
+    {
+      title: 'Discovery',
+      description:
+        'Automatically discover and follow new URLs within inclusion domains.',
+    },
+    {
+      title: 'RSS',
+      description: 'Parse and follow RSS/Atom feeds for new content.',
+    },
+    {
+      title: 'Sitemap',
+      description: 'Extract and crawl URLs from XML sitemaps.',
+    },
+  ]}
+/>
+
+## Configuration
+
+| Option            | Type               | Description                              |
+| ----------------- | ------------------ | ---------------------------------------- |
+| seeds             | string[]           | Starting URLs                            |
+| depth             | number (1–10)      | Max link depth to follow                 |
+| schedule          | once \| interval \| cron | Execution timing                   |
+| inclusionDomains  | string[]           | Only crawl these domains                 |
+| exclusionDomains  | string[]           | Skip these domains                       |
+| useHeadless       | boolean            | Use Puppeteer for JS-rendered pages      |
+| rotatingProxy     | boolean            | Route through proxy pool (billable)      |
+
+## Create a Fetcher
+
+```http
+POST /api/v1/collections/{collectionId}/fetchers
+
+{
+  "name": "Product Pages",
+  "type": "seedlist",
+  "seeds": ["https://example.com/products"],
+  "depth": 2,
+  "schedule": "once",
+  "useHeadless": false,
+  "rotatingProxy": false,
+  "inclusionDomains": ["example.com"],
+  "exclusionDomains": []
+}
+```
+
+## Trigger a Run
+
+```http
+POST /api/v1/fetchers/{fetcherId}/run
+
+# Response 202
+{
+  "runId": "run-abc123",
+  "fetcherId": "fet-xyz789",
+  "status": "running",
+  "pagesCrawled": 0,
+  "startedAt": "2026-02-07T10:00:00Z",
+  "endedAt": null
+}
+```
+
+## Outputs
+
+- Output is stored in **WARC format**
+- Optional **GZIP compression** available
+- Download via API or push to S3-compatible storage

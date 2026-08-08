@@ -12,13 +12,14 @@ import {
   FileText,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { DOCS_URL } from "@/lib/docs";
 import { cn } from "@/utils/utils";
 
 const navLinks = [
   { label: "Features", href: "#features" },
   { label: "How It Works", href: "#how-it-works" },
   { label: "Pricing", href: "#pricing" },
-  { label: "Docs", href: "/docs", isRoute: true },
+  { label: "Docs", href: DOCS_URL, external: true },
 ];
 
 const resourcesSubLinks = [
@@ -138,14 +139,14 @@ export default function Navbar() {
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-1">
           {navLinks.map((link) =>
-            link.isRoute ? (
-              <Link
+            link.external ? (
+              <a
                 key={link.href}
                 href={link.href}
                 className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-md"
               >
                 {link.label}
-              </Link>
+              </a>
             ) : (
               <a
                 key={link.href}
@@ -244,15 +245,15 @@ export default function Navbar() {
         <div className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border">
           <div className="px-6 py-4 space-y-1">
             {navLinks.map((link) =>
-              link.isRoute ? (
-                <Link
+              link.external ? (
+                <a
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
                   className="block px-3 py-2.5 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-md"
                 >
                   {link.label}
-                </Link>
+                </a>
               ) : (
                 <a
                   key={link.href}

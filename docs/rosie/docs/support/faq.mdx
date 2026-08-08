@@ -1,0 +1,56 @@
+---
+sidebar_label: FAQ
+hide_table_of_contents: true
+title: Frequently Asked Questions
+---
+
+import FaqList from '@site/src/components/docs/FaqList';
+import Callout from '@site/src/components/docs/Callout';
+import Link from '@docusaurus/Link';
+
+# Frequently Asked Questions
+
+Quick answers to common questions about Rosie.
+
+<FaqList
+  faqs={[
+    {
+      q: 'What is the primary billing unit?',
+      a: 'Pages Crawled is the primary metering unit. Proxy usage is tracked separately. You can monitor your usage in the dashboard or via the /account/usage API endpoint.',
+    },
+    {
+      q: 'What output formats are supported?',
+      a: 'All crawl outputs are stored in WARC format. Optional GZIP compression is available. You can download outputs via the API or push them to any S3-compatible storage.',
+    },
+    {
+      q: 'How long is crawl data retained?',
+      a: 'Starter and Pro plans retain data for 180 days. Enterprise plans offer 3-year retention. Custom retention policies can be configured by platform admins.',
+    },
+    {
+      q: "Can I use a headless browser for JavaScript-heavy sites?",
+      a: "Yes — enable the 'useHeadless' option on any fetcher. This uses Puppeteer under the hood. Note that headless mode is only available on Pro and Enterprise plans.",
+    },
+    {
+      q: 'How does the rotating proxy work?',
+      a: "When enabled, requests are routed through Rosie's proxy pool to avoid IP-based blocking. Enterprise customers get dedicated proxy pools. Proxy usage is billed separately.",
+    },
+    {
+      q: 'What happens if a crawl fails?',
+      a: "Failed runs are logged with error details. You'll receive a completion webhook with failure status. Runs can be retried manually or will follow your configured schedule.",
+    },
+    {
+      q: 'How do I invite team members?',
+      a: 'Account Admins can invite members via Settings → Team Management. Team Members get access to collections and fetchers but not billing or user management.',
+    },
+    {
+      q: 'Is there an API rate limit?',
+      a: 'Yes — Starter: 100 req/min, Pro: 500 req/min, Enterprise: custom limits. Exceeding the limit returns a 429 status with a Retry-After header.',
+    },
+  ]}
+/>
+
+<Callout title="Still have questions?">
+  Check the <Link to="/docs/api/rest">API reference</Link> for technical
+  details, or reach out to our support team at{' '}
+  <strong>support@rosie.dev</strong>.
+</Callout>

@@ -1,0 +1,366 @@
+/**
+ * Rosie docs theme — Infima overrides matching the product docs UI.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --ifm-color-primary: #2a909d;
+  --ifm-color-primary-dark: #247f8a;
+  --ifm-color-primary-darker: #21747e;
+  --ifm-color-primary-darkest: #1b5e66;
+  --ifm-color-primary-light: #30a4b3;
+  --ifm-color-primary-lighter: #35b0bf;
+  --ifm-color-primary-lightest: #47bcc9;
+
+  --ifm-color-success: #29a366;
+  --ifm-color-warning: #f0a010;
+  --ifm-color-danger: #dc2626;
+
+  --ifm-font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+  --ifm-heading-font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  --ifm-font-color-base: #1c2430;
+  --ifm-heading-color: #1c2430;
+
+  --ifm-background-color: #f4f6f9;
+  --ifm-navbar-background-color: #ffffff;
+  --ifm-navbar-height: 3.5rem;
+  --ifm-navbar-shadow: 0 1px 0 #e5e8ed;
+  --ifm-global-radius: 8px;
+  --ifm-code-font-size: 85%;
+  --ifm-pre-background: #0f1419;
+
+  --ifm-hover-overlay: rgba(42, 144, 157, 0.08);
+  --ifm-toc-border-color: #e5e8ed;
+  --ifm-hr-border-color: #e5e8ed;
+
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.08);
+
+  --doc-sidebar-width: 16rem !important;
+  --rosie-card-border: #e5e8ed;
+  --rosie-muted: #6b7280;
+  --rosie-card-bg: #ffffff;
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #31a8b5;
+  --ifm-color-primary-dark: #2b97a3;
+  --ifm-color-primary-darker: #288f9a;
+  --ifm-color-primary-darkest: #21767f;
+  --ifm-color-primary-light: #46b1bd;
+  --ifm-color-primary-lighter: #51b6c1;
+  --ifm-color-primary-lightest: #72c5ce;
+
+  --ifm-background-color: #0f1419;
+  --ifm-navbar-background-color: #141a21;
+  --ifm-font-color-base: #e5e7eb;
+  --ifm-heading-color: #f3f4f6;
+  --ifm-navbar-shadow: 0 1px 0 #1f2937;
+  --rosie-card-border: #1f2937;
+  --rosie-muted: #9ca3af;
+  --rosie-card-bg: #141a21;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* --- Navbar --- */
+
+.navbar {
+  border-bottom: 1px solid var(--rosie-card-border);
+}
+
+.navbar__logo {
+  height: 28px;
+  width: 28px;
+  margin-right: 0.5rem;
+}
+
+.navbar__logo img {
+  height: 28px;
+  width: 28px;
+}
+
+.navbar__title {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.navbar__title::after {
+  content: 'Documentation';
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: var(--rosie-muted);
+  border-left: 1px solid var(--rosie-card-border);
+  margin-left: 0.75rem;
+  padding-left: 0.75rem;
+  letter-spacing: 0;
+}
+
+.navbar-login {
+  color: var(--ifm-font-color-base) !important;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.navbar-login:hover {
+  color: var(--ifm-color-primary) !important;
+  text-decoration: none !important;
+}
+
+.navbar-get-started {
+  background: var(--ifm-color-primary) !important;
+  color: #fff !important;
+  border-radius: 6px;
+  padding: 0.4rem 0.9rem !important;
+  font-weight: 500;
+  font-size: 0.875rem;
+  margin-left: 0.25rem;
+}
+
+.navbar-get-started:hover {
+  background: var(--ifm-color-primary-dark) !important;
+  color: #fff !important;
+  text-decoration: none !important;
+}
+
+/* --- Footer (hidden to match screenshot) --- */
+
+.footer {
+  display: none;
+}
+
+/* --- Sidebar --- */
+
+.theme-doc-sidebar-container {
+  background: var(--rosie-card-bg);
+  border-right: 1px solid var(--rosie-card-border) !important;
+}
+
+.menu {
+  padding: 1rem 0.75rem !important;
+  font-weight: 400;
+}
+
+.theme-doc-sidebar-item-category {
+  margin-bottom: 1.25rem;
+}
+
+.theme-doc-sidebar-item-category > .menu__list-item-collapsible {
+  background: transparent !important;
+}
+
+.theme-doc-sidebar-item-category > .menu__list-item-collapsible:hover {
+  background: transparent !important;
+}
+
+.theme-doc-sidebar-item-category > .menu__list-item-collapsible > .menu__link {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--rosie-muted) !important;
+  padding: 0 0.75rem 0.5rem;
+  cursor: default;
+}
+
+.theme-doc-sidebar-item-category > .menu__list-item-collapsible > .menu__link:hover,
+.theme-doc-sidebar-item-category > .menu__list-item-collapsible > .menu__link:focus {
+  background: transparent !important;
+  color: var(--rosie-muted) !important;
+}
+
+.theme-doc-sidebar-item-category .menu__caret,
+.theme-doc-sidebar-item-category > .menu__list-item-collapsible > .menu__link--sublist-caret::after {
+  display: none !important;
+}
+
+.menu__list .menu__list {
+  padding-left: 0 !important;
+  margin: 0;
+}
+
+.menu__link {
+  border-radius: 6px;
+  font-size: 0.875rem;
+  color: var(--rosie-muted);
+  padding: 0.5rem 0.75rem;
+}
+
+.menu__link:hover {
+  background: var(--ifm-hover-overlay);
+  color: var(--ifm-font-color-base);
+}
+
+.menu__link--active:not(.menu__link--sublist) {
+  background: rgba(42, 144, 157, 0.1);
+  color: var(--ifm-color-primary);
+  font-weight: 500;
+}
+
+.menu__list-item:not(:first-child) {
+  margin-top: 0.125rem;
+}
+
+/* --- Main docs area --- */
+
+main .container {
+  max-width: 48rem;
+}
+
+.theme-doc-markdown {
+  --ifm-heading-color: #1c2430;
+}
+
+.theme-doc-markdown header h1,
+.markdown h1:first-child {
+  font-size: 1.875rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.75rem;
+}
+
+.theme-doc-markdown > p:first-of-type,
+.markdown > p:first-of-type {
+  font-size: 1rem;
+  color: var(--rosie-muted);
+  line-height: 1.625;
+  max-width: 42rem;
+}
+
+.markdown h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.markdown h3 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.markdown p,
+.markdown li {
+  color: var(--rosie-muted);
+  font-size: 0.875rem;
+  line-height: 1.625;
+}
+
+.markdown strong {
+  color: var(--ifm-font-color-base);
+}
+
+.markdown ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.markdown ul > li {
+  position: relative;
+  padding-left: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.markdown ul > li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ifm-color-primary);
+}
+
+.markdown table {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--rosie-card-border);
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 0.875rem;
+  margin-bottom: 0;
+}
+
+.markdown thead tr {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.markdown th {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--rosie-muted);
+  text-transform: none;
+  border: none;
+  border-bottom: 1px solid var(--rosie-card-border);
+  padding: 0.625rem 1rem;
+  text-align: left;
+}
+
+.markdown td {
+  border: none;
+  border-bottom: 1px solid var(--rosie-card-border);
+  padding: 0.625rem 1rem;
+  color: var(--rosie-muted);
+}
+
+.markdown tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.markdown td code {
+  font-size: 0.75rem;
+  color: var(--ifm-font-color-base);
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.markdown code:not(pre code) {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  padding: 0.125rem 0.375rem;
+  font-size: 0.75rem;
+  border: none;
+  color: var(--ifm-font-color-base);
+}
+
+.theme-code-block {
+  border-radius: 8px;
+  font-size: 0.75rem;
+  margin-bottom: 0;
+}
+
+.theme-doc-footer {
+  margin-top: 2.5rem;
+}
+
+.pagination-nav {
+  margin-top: 2rem;
+}
+
+.pagination-nav__link {
+  border-color: var(--rosie-card-border);
+  border-radius: 8px;
+}
+
+.pagination-nav__link:hover {
+  border-color: var(--ifm-color-primary);
+}
+
+/* Hide right TOC so the intro layout matches the screenshot */
+.theme-doc-toc-desktop,
+.col.col--3 {
+  display: none;
+}
+
+@media (min-width: 997px) {
+  .col.col--9 {
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+  }
+}

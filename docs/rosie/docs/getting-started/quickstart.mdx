@@ -1,0 +1,67 @@
+---
+sidebar_label: Quickstart
+hide_table_of_contents: true
+title: Quickstart
+---
+
+import StepHeading from '@site/src/components/docs/StepHeading';
+import NextSteps from '@site/src/components/docs/NextSteps';
+
+# Quickstart
+
+Get your first crawl running in under 2 minutes.
+
+<StepHeading n={1}>Create an Account</StepHeading>
+
+Sign up at [rosie.dev/signup](http://localhost:3000/signup). No credit card is required for the Starter plan.
+
+<StepHeading n={2}>Generate API Keys</StepHeading>
+
+Navigate to **Settings → API Keys** and generate a new key pair. Copy both the publishable key and the secret key.
+
+```bash
+# Your keys will look like this:
+API Key:    rk_live_abc123...
+Secret Key: rs_live_xyz789...
+```
+
+<StepHeading n={3}>Create a Collection</StepHeading>
+
+Collections group related fetchers. Create one via the API:
+
+```bash
+curl -X POST https://api.rosie.dev/v1/collections \
+  -H "Authorization: Bearer rk_live_..." \
+  -H "Content-Type: application/json" \
+  -d '{ "name": "E-Commerce Monitoring" }'
+```
+
+<StepHeading n={4}>Create and Run a Fetcher</StepHeading>
+
+Add a fetcher to your collection, then trigger a run:
+
+```bash
+# Create a seedlist fetcher
+curl -X POST https://api.rosie.dev/v1/collections/{id}/fetchers \
+  -H "Authorization: Bearer rk_live_..." \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Product Pages",
+    "type": "seedlist",
+    "seeds": ["https://example.com/products"],
+    "depth": 2,
+    "schedule": "once"
+  }'
+
+# Trigger a run
+curl -X POST https://api.rosie.dev/v1/fetchers/{id}/run \
+  -H "Authorization: Bearer rk_live_..."
+```
+
+<NextSteps
+  items={[
+    {label: 'Learn about fetcher types', path: '/docs/concepts/fetchers'},
+    {label: 'Set up webhooks for real-time updates', path: '/docs/concepts/webhooks'},
+    {label: 'Explore the full API reference', path: '/docs/api/rest'},
+  ]}
+/>

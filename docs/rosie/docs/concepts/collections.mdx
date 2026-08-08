@@ -1,0 +1,57 @@
+---
+sidebar_label: Collections
+hide_table_of_contents: true
+title: Collections
+---
+
+# Collections
+
+Collections are logical groupings of fetchers. Use them to organise crawl jobs by project, domain, or team.
+
+## Key Properties
+
+| Field        | Type      | Description                    |
+| ------------ | --------- | ------------------------------ |
+| collectionId | UUID      | Unique identifier              |
+| accountId    | UUID      | Owning account                 |
+| name         | string    | Display name (max 80 chars)    |
+| createdAt    | timestamp | Creation time (ISO 8601)       |
+
+## Create a Collection
+
+```http
+POST /api/v1/collections
+
+{
+  "name": "E-Commerce Monitoring"
+}
+
+# Response 201
+{
+  "collectionId": "col-abc123",
+  "accountId": "acc-001",
+  "name": "E-Commerce Monitoring",
+  "createdAt": "2026-02-07T10:00:00Z"
+}
+```
+
+## List Collections
+
+```http
+GET /api/v1/collections
+
+# Response 200
+{
+  "data": [
+    { "collectionId": "col-abc123", "name": "E-Commerce Monitoring", ... },
+    { "collectionId": "col-def456", "name": "News Aggregation", ... }
+  ],
+  "total": 2
+}
+```
+
+## Plan Limits
+
+- **Starter:** 5 collections
+- **Pro:** 25 collections
+- **Enterprise:** Unlimited

@@ -1,12 +1,13 @@
-import Link from "next/link"; 
+import Link from "next/link";
 import { Zap } from "lucide-react";
+import { DOCS_URL } from "@/lib/docs";
 
 const footerLinks = {
   Product: [
     { label: "Features", href: "#features" },
     { label: "Pricing", href: "#pricing" },
     { label: "Changelog", href: "#" },
-    { label: "Documentation", href: "#" },
+    { label: "Documentation", href: DOCS_URL },
   ],
   Company: [
     { label: "About", href: "#" },
@@ -75,7 +76,7 @@ export function Footer() {
               Status
             </a>
             <a
-              href="#"
+              href={`${DOCS_URL}/docs/api/rest`}
               className="text-xs text-muted-foreground hover:text-foreground transition-colors"
             >
               API Docs

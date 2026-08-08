@@ -1,0 +1,81 @@
+---
+sidebar_label: Webhooks
+hide_table_of_contents: true
+title: Webhooks
+---
+
+import InfoCards from '@site/src/components/docs/InfoCards';
+
+# Webhooks
+
+Receive real-time notifications when crawl events occur. Each fetcher supports progress and completion webhooks.
+
+## Supported Events
+
+<InfoCards
+  items={[
+    {
+      title: 'Progress',
+      description:
+        'Periodic updates during a crawl run with current page count and status.',
+    },
+    {
+      title: 'Completion',
+      description:
+        'Fired when a run finishes — includes success/failure status and final metrics.',
+    },
+  ]}
+/>
+
+## Register a Webhook
+
+```http
+POST /api/v1/fetchers/{fetcherId}/webhooks
+
+{
+  "url": "https://your-server.com/webhooks/rosie",
+  "events": ["progress", "completion"],
+  "secret": "whsec_your_signing_secret"
+}
+```
+
+## Payload Format
+
+```json
+{
+  "event": "completion",
+  "fetcherId": "fet-abc123",
+  "runId": "run-xyz789",
+  "status": "success",
+  "pagesCrawled": 12450,
+  "startedAt": "2026-02-07T08:00:00Z",
+  "endedAt": "2026-02-07T10:45:00Z",
+  "timestamp": "2026-02-07T10:45:01Z"
+}
+```
+
+## Security
+
+All webhook payloads are signed using HMAC-SHA256 with your webhook secret. Verify the `X-Rosie-Signature` header to ensure the request is authentic.
+
+```js
+// Node.js verification example
+const crypto = require('crypto');
+
+function verifyWebhook(payload, signature, secret) {
+  const expected = crypto
+    .createHmac('sha256', secret)
+    .update(payload)
+    .digest('hex');
+  return crypto.timingSafeEqual(
+    Buffer.from(signature),
+    Buffer.from(expected)
+  );
+}
+```
+
+## Retry Policy
+
+- Failed deliveries are retried up to **5 times**
+- Exponential backoff: 30s, 2m, 10m, 30m, 2h
+- Webhook is disabled after 5 consecutive failures

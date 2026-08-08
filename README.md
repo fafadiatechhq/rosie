@@ -29,13 +29,14 @@ Download collected data as CSV, JSON, or XLSX, filtered by collection, job, or d
 
 ## How It Works
 
-Rosie has three parts that work together:
+Rosie has four parts that work together:
 
 | Component | What it does |
 |---|---|
 | **Browser Extension** | Quick access to scrape, monitor, and crawl from any tab |
 | **Web App** | Full dashboard for managing jobs, collections, usage, and billing |
 | **Crawler Agent** | High-performance Go-based engine that runs the actual crawls |
+| **Documentation** | Docusaurus site for getting started, concepts, and API reference |
 
 Fetchers (the individual scraping jobs) support several modes:
 
@@ -57,12 +58,22 @@ rosie/
 ├── agent/          # Go-based crawler engine
 ├── backend/        # Django API and admin
 ├── extension/      # Browser extension
-├── frontend/       # Next.js web app
-└── docs/           # Additional documentation
+├── frontend/       # Next.js web app (links Docs to Docusaurus)
+└── docs/rosie      # Docusaurus documentation site
 ```
+
+Local Docker stack:
+
+| Service | URL |
+|---|---|
+| Backend (Django) | http://localhost:8000 |
+| Frontend (Next.js) | http://localhost:3000 |
+| Docs (Docusaurus) | http://localhost:3001 |
+
+The web app navbar/footer Docs and API Docs links go to the docs site. Docs Log In / Get Started link back to the app.
 
 ---
 
 ## Developer Setup
 
-See [DEVNOTES.md](DEVNOTES.md) for local development setup using Docker and VS Code Dev Containers.
+See [DEVNOTES.md](DEVNOTES.md) for local development setup using Docker and VS Code Dev Containers. Docs live-reload on save — no image rebuild.

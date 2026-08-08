@@ -146,7 +146,7 @@ To check running containers:
 docker ps
 ```
 
-You should see: - Backend (Django) - Frontend - PostgreSQL
+You should see: - Backend (Django) - Frontend - Docs - PostgreSQL
 
 ## Access the Application
 
@@ -154,6 +154,7 @@ You should see: - Backend (Django) - Frontend - PostgreSQL
   ---------- -----------------------
   Backend    http://localhost:8000
   Frontend   http://localhost:3000
+  Docs       http://localhost:3001
 
 ## Django Admin Credentials
 
@@ -171,6 +172,7 @@ Use these credentials to log in.
 -   Containers start automatically via Dev Container setup
 -   No need to manually run migrations or create superuser
 -   Everything is handled via Docker + entrypoint script
+-   Docs live-reloads on save at http://localhost:3001 (no image rebuild)
 
 ## Troubleshooting
 

@@ -1,0 +1,63 @@
+---
+sidebar_label: Authentication
+hide_table_of_contents: true
+title: Authentication
+---
+
+import InfoCards from '@site/src/components/docs/InfoCards';
+
+# Authentication
+
+Rosie uses API keys to authenticate all requests. Every account can generate multiple key pairs for different environments or integrations.
+
+## Key Types
+
+<InfoCards
+  items={[
+    {
+      title: 'Publishable Key',
+      meta: (
+        <>
+          Prefix: <code>rk_live_</code>
+        </>
+      ),
+      description:
+        'Used in API requests. Can be exposed in client-side code but has limited permissions.',
+    },
+    {
+      title: 'Secret Key',
+      meta: (
+        <>
+          Prefix: <code>rs_live_</code>
+        </>
+      ),
+      description:
+        'Full permissions. Must be kept server-side. Never expose in client code or version control.',
+    },
+  ]}
+/>
+
+## Using API Keys
+
+Include your API key in the `Authorization` header:
+
+```bash
+curl -X GET https://api.rosie.dev/v1/collections \
+  -H "Authorization: Bearer rk_live_your_api_key" \
+  -H "Content-Type: application/json"
+```
+
+## Key Management
+
+- Rotate keys periodically — old keys can be revoked without downtime
+- Use separate keys for development and production environments
+- Secret keys are shown only once at creation — store them securely
+- Revoked keys return 401 Unauthorized immediately
+
+## Rate Limits
+
+| Plan       | Rate Limit   | Burst  |
+| ---------- | ------------ | ------ |
+| Starter    | 100 req/min  | 20     |
+| Pro        | 500 req/min  | 50     |
+| Enterprise | Custom       | Custom |

@@ -1,0 +1,88 @@
+---
+sidebar_label: REST API
+hide_table_of_contents: true
+title: REST API Reference
+---
+
+import EndpointList from '@site/src/components/docs/EndpointList';
+
+# REST API Reference
+
+Complete reference for the Rosie REST API (OpenAPI v1). All endpoints require authentication via API key.
+
+## Base URL
+
+```text
+https://api.rosie.dev/v1
+```
+
+## Collections
+
+<EndpointList
+  endpoints={[
+    {method: 'GET', path: '/collections', desc: 'List all collections'},
+    {method: 'POST', path: '/collections', desc: 'Create a new collection'},
+    {method: 'GET', path: '/collections/{id}', desc: 'Get collection details'},
+    {method: 'DELETE', path: '/collections/{id}', desc: 'Delete a collection'},
+  ]}
+/>
+
+## Fetchers
+
+<EndpointList
+  endpoints={[
+    {method: 'POST', path: '/collections/{id}/fetchers', desc: 'Create a fetcher'},
+    {method: 'GET', path: '/fetchers/{id}', desc: 'Get fetcher details'},
+    {method: 'PUT', path: '/fetchers/{id}', desc: 'Update a fetcher'},
+    {method: 'DELETE', path: '/fetchers/{id}', desc: 'Delete a fetcher'},
+    {method: 'POST', path: '/fetchers/{id}/run', desc: 'Trigger a run'},
+  ]}
+/>
+
+## Logs & Status
+
+<EndpointList
+  endpoints={[
+    {method: 'GET', path: '/fetchers/{id}/logs', desc: 'Get fetcher logs'},
+    {method: 'GET', path: '/fetchers/{id}/status', desc: 'Get run status'},
+  ]}
+/>
+
+## Webhooks
+
+<EndpointList
+  endpoints={[
+    {method: 'POST', path: '/fetchers/{id}/webhooks', desc: 'Register a webhook'},
+    {method: 'DELETE', path: '/webhooks/{id}', desc: 'Remove a webhook'},
+  ]}
+/>
+
+## Billing & Usage
+
+<EndpointList
+  endpoints={[
+    {method: 'GET', path: '/account/usage', desc: 'Get current usage metrics'},
+    {method: 'GET', path: '/account/billing', desc: 'Get billing summary'},
+  ]}
+/>
+
+## Error Responses
+
+```json
+{
+  "error": {
+    "code": "RATE_LIMIT_EXCEEDED",
+    "message": "Too many requests. Retry after 30 seconds.",
+    "retryAfter": 30
+  }
+}
+```
+
+Common status codes:
+
+- **400 Bad Request** — Invalid input
+- **401 Unauthorized** — Missing or invalid API key
+- **403 Forbidden** — Insufficient permissions
+- **404 Not Found** — Resource doesn't exist
+- **429 Too Many Requests** — Rate limit exceeded
+- **500 Internal Server Error** — Contact support
