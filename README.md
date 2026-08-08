@@ -1,167 +1,64 @@
 # Rosie
 
-Rosie is a high-performance, distributed web crawler designed to efficiently explore and index massive datasets across the internet or within private networks.
+Rosie is a web scraping and monitoring platform that lets you extract data from any website, track changes over time, and export results — without writing code.
 
 ---
 
-# Rosie App – Development Setup (Dev Container)
+## What You Can Do
 
-This guide explains how to set up the Rosie project (Backend + Frontend + PostgreSQL) using a VS Code Dev Container.
+### Quick Scrape
+Extract text, links, images, and tables from any page in seconds. Point Rosie at a URL, optionally target a specific CSS selector, and get structured data immediately.
+
+### Monitor Pages
+Watch a page (or a specific element on it) for changes on a schedule. Rosie checks the page at your chosen interval and alerts you when something changes — useful for price tracking, competitor monitoring, or news feeds.
+
+### Crawl Sites
+Systematically walk an entire website and collect data from every page. Configure crawl depth, page limits, URL pattern filters, and what to extract from each page.
+
+### Organize with Collections
+Group scraped data into named collections (e.g. "Research", "Prices", "Competitors") so results from related jobs stay together and are easy to find.
+
+### Export Your Data
+Download collected data as CSV, JSON, or XLSX, filtered by collection, job, or date range.
 
 ---
 
-## Prerequisites
+## How It Works
 
-Make sure you have the following installed:
+Rosie has three parts that work together:
 
-- VS Code 
-- Docker 
-- Git 
+| Component | What it does |
+|---|---|
+| **Browser Extension** | Quick access to scrape, monitor, and crawl from any tab |
+| **Web App** | Full dashboard for managing jobs, collections, usage, and billing |
+| **Crawler Agent** | High-performance Go-based engine that runs the actual crawls |
 
-VS Code Extension:
-- Dev Containers (ms-vscode-remote.remote-containers)
+Fetchers (the individual scraping jobs) support several modes:
+
+- **Seed list** — crawl a specific list of URLs
+- **Monitor** — watch a page for changes on a schedule
+- **Full site** — crawl an entire domain
+- **Discovery** — find and follow new URLs automatically
+- **RSS / Sitemap** — ingest structured feed sources
+
+Fetchers can run once, on a fixed interval, or on a custom cron schedule. They support headless browser rendering (for JavaScript-heavy pages) and rotating proxies.
 
 ---
+
 
 ## Project Structure
 
-```bash
+```
 rosie/
-├── backend/
-├── frontend/
-├── docker-compose.yml
-├── docker-compose.dev.yml
-├── README.md
-└── DEVNOTES.md
+├── agent/          # Go-based crawler engine
+├── backend/        # Django API and admin
+├── extension/      # Browser extension
+├── frontend/       # Next.js web app
+└── docs/           # Additional documentation
 ```
 
 ---
 
-## Setup Steps
+## Developer Setup
 
-### 1. Install Dev Containers Extension
-
-- Open VS Code 
-- Go to Extensions (Ctrl + Shift + X) 
-- Search for Dev Containers 
-- Install it 
-
----
-
-### 2. Create Workspace Directory
-
-```bash
-mkdir ~/Code
-cd ~/Code
-```
-
----
-
-### 3. Clone the Repository
-
-```bash
-git clone <your-repo-url>
-cd <repo-folder>
-```
-
----
-
-### 4. Checkout Develop Branch
-
-```bash
-git checkout develop
-git pull origin develop
-```
-
----
-
-### 5. Setup Backend Environment File
-
-Navigate to backend directory:
-
-```bash
-cd backend/rosie
-```
-
-Create .env file:
-
-```bash
-touch .env
-```
-
-Add the following content inside .env:
-
-```bash
-POSTGRES_DB=rosie
-POSTGRES_USER=rosie
-POSTGRES_PASSWORD=rosie
-POSTGRES_HOST=rosie-db
-POSTGRES_PORT=5432
-
-DJANGO_SUPERUSER_USERNAME=rosie
-DJANGO_SUPERUSER_EMAIL=admin@example.com
-DJANGO_SUPERUSER_PASSWORD=admin123
-```
-
----
-
-### 6. Open Project in VS Code
-
-```bash
-cd ~/Code/<repo-folder>
-code .
-```
-
----
-
-### 7. Rebuild and Start Dev Container
-
-- Press: Ctrl + Shift + P 
-- Select: Dev Containers: Rebuild and Reopen in Container 
-
-This will:
-- Build Docker containers 
-- Start backend (Django) 
-- Start frontend (Next.js) 
-- Start PostgreSQL database 
-- Install all dependencies 
----
-
-## Running the Application
-
-Once the container is built:
-
-Backend (Django):
-http://localhost:8000
-
-Frontend (Next.js):
-http://localhost:3000
-
-Database (PostgreSQL):
-- Host: rosie-db 
-- Port: 5432 
-- Database: rosie 
-
-Backend, frontend, and PostgreSQL all run together using Docker Compose.
-
----
-
-## Services Overview
-
-- Backend → Django application 
-- Frontend → Next.js application 
-- Database → PostgreSQL container 
-
----
-
-## Notes
-
-- Ensure Docker is running before opening the project 
-- First build may take time 
-- This setup runs frontend + backend + database together 
-
-If something breaks:
-
-```bash
-Dev Containers: Rebuild Container (without cache)
-```
+See [DEVNOTES.md](DEVNOTES.md) for local development setup using Docker and VS Code Dev Containers.
