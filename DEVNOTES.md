@@ -1,12 +1,12 @@
 # DEVNOTES
 
-These are general develop instructions
+These are general development instructions
 
 
 ## Backend
 
 1. Once the environment is setup ensure you setup pre-commit correctly `pip3 install pre-commit`
-1. With virtualenv activiated do `pre-commit install` from project's root directory
+1. With virtualenv activated do `pre-commit install` from project's root directory
 
 
 ## Docker Instructions
@@ -183,4 +183,7 @@ docker logs <container-name>
 
 ### Rebuild containers
 
-\`\`\` bash docker compose down -v docker compose up --build
+```bash
+docker compose down -v
+docker compose up --build
+```
