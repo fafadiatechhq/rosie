@@ -8,9 +8,7 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-        ("accounts", "0001_create_tenant"),
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
@@ -29,13 +27,6 @@ class Migration(migrations.Migration):
                 ("description", models.TextField(blank=True, null=True)),
                 ("created_at", models.DateTimeField(auto_now_add=True)),
                 ("updated_at", models.DateTimeField(auto_now=True)),
-                (
-                    "account",
-                    models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE,
-                        to="accounts.tenant",
-                    ),
-                ),
             ],
         ),
         migrations.CreateModel(

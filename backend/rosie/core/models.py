@@ -2,11 +2,9 @@ from __future__ import annotations
 
 from django.db import models
 from django.utils.text import slugify
-from accounts.models import Tenant
 
 
 class Collection(models.Model):
-    account = models.ForeignKey(Tenant, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)

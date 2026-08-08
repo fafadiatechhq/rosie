@@ -1,107 +1,12 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
-from accounts.models import Tenant
-from billing.models import Plan, Subscription
 from core.models import Collection, Fetcher, FetcherSeedlist, FetcherRun
 from .serializers import (
-    TenantSerializer,
-    PlanSerializer,
-    SubscriptionSerializer,
     CollectionSerializer,
     FetcherSerializer,
     FetcherSeedlistSerializer,
     FetcherRunSerializer,
 )
-
-
-class TenantAPI(viewsets.ModelViewSet):
-    """
-    ViewSet for managing Tenant instances.
-
-    Provides CRUD operations:
-    - list: GET /api/v1/tenants/
-    - create: POST /api/v1/tenants/
-    - retrieve: GET /api/v1/tenants/{id}/
-    - update: PUT /api/v1/tenants/{id}/
-    - partial_update: PATCH /api/v1/tenants/{id}/
-    - destroy: DELETE /api/v1/tenants/{id}/
-    """
-
-    queryset = Tenant.objects.all()
-    serializer_class = TenantSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        """
-        Optionally restricts the returned tenants to those owned by the current user.
-        """
-        queryset = Tenant.objects.all()
-        # Filter by owner if requested
-        owner_id = self.request.query_params.get("owner", None)
-        if owner_id is not None:
-            queryset = queryset.filter(owner_id=owner_id)
-        return queryset
-
-    def perform_create(self, serializer):
-        """
-        Set the owner to the current user if not provided.
-        """
-        if "owner" not in serializer.validated_data:
-            serializer.save(owner=self.request.user)
-        else:
-            serializer.save()
-
-
-class PlanAPI(viewsets.ModelViewSet):
-    """
-    ViewSet for managing Plan instances.
-
-    Provides CRUD operations:
-    - list: GET /api/v1/plans/
-    - create: POST /api/v1/plans/
-    - retrieve: GET /api/v1/plans/{id}/
-    - update: PUT /api/v1/plans/{id}/
-    - partial_update: PATCH /api/v1/plans/{id}/
-    - destroy: DELETE /api/v1/plans/{id}/
-    """
-
-    queryset = Plan.objects.all()
-    serializer_class = PlanSerializer
-    permission_classes = [IsAuthenticated]
-
-
-class SubscriptionAPI(viewsets.ModelViewSet):
-    """
-    ViewSet for managing Subscription instances.
-
-    Provides CRUD operations:
-    - list: GET /api/v1/subscriptions/
-    - create: POST /api/v1/subscriptions/
-    - retrieve: GET /api/v1/subscriptions/{id}/
-    - update: PUT /api/v1/subscriptions/{id}/
-    - partial_update: PATCH /api/v1/subscriptions/{id}/
-    - destroy: DELETE /api/v1/subscriptions/{id}/
-    """
-
-    queryset = Subscription.objects.all()
-    serializer_class = SubscriptionSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        """
-        Optionally restricts the returned subscriptions by tenant.
-        """
-        queryset = Subscription.objects.all()
-        tenant_id = self.request.query_params.get("tenant", None)
-        if tenant_id is not None:
-            queryset = queryset.filter(tenant_id=tenant_id)
-        plan_id = self.request.query_params.get("plan", None)
-        if plan_id is not None:
-            queryset = queryset.filter(plan_id=plan_id)
-        status = self.request.query_params.get("status", None)
-        if status is not None:
-            queryset = queryset.filter(status=status)
-        return queryset
 
 
 class CollectionAPI(viewsets.ModelViewSet):
@@ -120,16 +25,6 @@ class CollectionAPI(viewsets.ModelViewSet):
     queryset = Collection.objects.all()
     serializer_class = CollectionSerializer
     permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        """
-        Optionally restricts the returned collections by account (tenant).
-        """
-        queryset = Collection.objects.all()
-        account_id = self.request.query_params.get("account", None)
-        if account_id is not None:
-            queryset = queryset.filter(account_id=account_id)
-        return queryset
 
 
 class FetcherAPI(viewsets.ModelViewSet):
